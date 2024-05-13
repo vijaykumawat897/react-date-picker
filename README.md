@@ -18,22 +18,28 @@ A lightweight plugin to select both **Single Date** and a **Date Range**.
 ## Screenshots
 
 Date Picker
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013002.png)
 
 
 Relative Options
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013101.png)
 
 Relative Search 
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013113.png)
 
 Absolute Date Picker
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013025.png)
 
 Month Selection
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013039.png)
 
 Year Selection
+
 ![App Screenshot](https://raw.githubusercontent.com/vijaykumawat897/react-date-picker/main/screenshots/Screenshot%202024-05-14%20013046.png)
 
 
