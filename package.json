@@ -1,0 +1,56 @@
+{
+  "name": "@vj97/react-date-picker",
+  "version": "1.0.0",
+  "description": "Plugin for date selection and date range selection in reactjs",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "build": "npx rollup -c"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vijaykumawat897/react-date-picker"
+  },
+  "keywords": [
+    "react",
+    "date",
+    "datepicker",
+    "date-picker",
+    "react-datepicker",
+    "react-date-picker",
+    "picker",
+    "daterange",
+    "date-range",
+    "date-range-picker",
+    "date-rangepicker",
+    "daterangepicker",
+    "react-date-range-picker",
+    "react-daterange-picker",
+    "@vj97/react-date-picker",
+    "@vj97",
+    "vj97"
+  ],
+  "bugs": {
+    "url": "https://github.com/vijaykumawat897/react-date-picker/issues"
+  },
+  "homepage": "https://github.com/vijaykumawat897/react-date-picker#readme",
+  "author": "Vijay Kumawat",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.24.1",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-react": "^7.24.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.17.2",
+    "rollup-plugin-import-css": "^3.5.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2"
+  }
+}

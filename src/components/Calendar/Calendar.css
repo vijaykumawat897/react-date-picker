@@ -1,0 +1,223 @@
+.calendar {
+  --day-height: 2.3em;
+  background: var(--bg);
+  border-radius: 2em;
+  color: var(--text-color);
+  height: 18em;
+  max-width: 40em;
+  width: 20em;
+}
+.calendar .header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar .header h3 {
+  border-radius: 6px;
+  color: var(--text-color);
+  margin: 0px 15px;
+  padding: 2px 20px;
+  text-align: center;
+}
+
+.calendar .header h3:not(.disabled):hover {
+  background: var(--hover);
+  color: var(--selection);
+  cursor: pointer;
+}
+
+.calendar .header button {
+  background: none;
+  border: none;
+  border-radius: 50px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 2em;
+  height: 1em;
+  line-height: 0;
+  width: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar .header button:hover {
+  color: var(--selection);
+  background: var(--hover);
+}
+
+.calendar .header button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.calendar .header button span {
+  display: block;
+  height: 16px;
+  line-height: 10px;
+}
+
+.calendar .weekdays {
+  display: flex;
+}
+
+.calendar .weekdays .weekday {
+  color: var(--selection);
+  flex: 1;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.calendar .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 14em;
+}
+
+.calendar .days .day {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  min-height: 2em;
+  position: relative;
+  z-index: 1;
+}
+
+.calendar .days .day.prev,
+.calendar .days .day.next,
+.calendar .days .day.disabled {
+  opacity: 0.5;
+}
+
+.calendar .days .day.disabled {
+  cursor: default;
+}
+
+.calendar .days .day .day-number {
+  align-items: center;
+  display: flex;
+  height: calc(100% - 2px);
+  justify-content: center;
+  max-height: var(--day-height);
+  width: 100%;
+  z-index: -1;
+}
+
+.calendar .days .day.highlighted .day-number {
+  color: var(--selection);
+}
+
+.calendar
+  .days:not(.disable-hover)
+  .day:not(.disabled, .highlighted):hover
+  .day-number {
+  background-color: var(--hover);
+  border-radius: 5em;
+  color: var(--selection);
+  width: var(--day-height);
+}
+
+.calendar
+  .days
+  .day.highlighted:not(.possible-selection-end, .possible-selection-start)
+  .day-number {
+  background-color: var(--hover);
+}
+
+.calendar .days .day.highlighted.highlight-start .day-number,
+.calendar .days .day.highlighted.highlight-end .day-number {
+  background-color: var(--selection);
+  border-radius: 5em;
+  width: var(--day-height);
+  color: var(--bg);
+}
+
+.calendar
+  .days
+  .day.highlighted.possible-selection-start:not(.possible-selection-end):before,
+.calendar
+  .days
+  .day.highlighted.possible-selection-end:not(.possible-selection-start):before,
+.calendar .days .day.highlighted.highlight-start:not(.highlight-end)::before,
+.calendar .days .day.highlighted.highlight-end:not(.highlight-start)::before {
+  background: var(--hover);
+  content: "";
+  height: calc(100% - 2px);
+  max-height: var(--day-height);
+  position: absolute;
+  width: calc(var(--day-height) + 0.2em);
+  z-index: -1;
+}
+
+.calendar .days .day.highlighted.highlight-end:not(.highlight-start)::before,
+.calendar
+  .days
+  .day.highlighted.possible-selection-end:not(
+    .possible-selection-start
+  ):before {
+  border-bottom-right-radius: 2em;
+  border-top-right-radius: 2em;
+  left: 0;
+}
+
+.calendar .days .day.highlighted.highlight-start:not(.highlight-end)::before,
+.calendar
+  .days
+  .day.highlighted.possible-selection-start:not(
+    .possible-selection-end
+  ):before {
+  border-bottom-left-radius: 1.1em;
+  border-top-left-radius: 1.1em;
+  right: 0;
+}
+
+.calendar .days .day .selected {
+  background-color: var(--selection);
+}
+
+.calendar .months-container,
+.calendar .years-container {
+  display: grid;
+  margin: 10px 0;
+}
+
+.calendar .months-container {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.calendar .years-container {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.calendar .months-container .month,
+.calendar .years-container .year {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 60px;
+}
+
+.calendar .months-container .month .month-name,
+.calendar .years-container .year .year-name {
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: 56px;
+  justify-content: center;
+  width: 56px;
+}
+
+.calendar .months-container .month .month-name.disabled,
+.calendar .years-container .year .year-name.disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.calendar .months-container .month .month-name:not(.disabled):hover,
+.calendar .years-container .year .year-name:not(.disabled):hover {
+  background: var(--hover);
+  color: var(--selection);
+}
