@@ -35,6 +35,8 @@ const PickerOptions = ({
   minDate,
   maxDate,
   dateFormat,
+  inputKey,
+  optionsKey,
 }) => {
   const [pickerType, setPickerType] = useState(
     selectedRelativeDate
@@ -74,12 +76,18 @@ const PickerOptions = ({
 
   useEffect(() => {
     const outsideClickListener = (event) => {
-      const targetElement = document.getElementById("date_picker_options");
-      const datePickerInput = document.getElementById("date_picker_input");
+      const targetElement = document.getElementById(
+        `date_picker_options_${optionsKey}`
+      );
+      const datePickerInput = document.getElementById(
+        `date_picker_input_${inputKey}`
+      );
+      const calendarIcon = document.getElementById(`calendar_${inputKey}`);
       if (
         targetElement &&
         !targetElement.contains(event.target) &&
-        event.target !== datePickerInput
+        event.target !== datePickerInput &&
+        event.target !== calendarIcon
       ) {
         setInputHasFocus(false);
       }
@@ -238,7 +246,7 @@ const PickerOptions = ({
   return (
     <div
       className={`date-picker-options ${popupPosition}`}
-      id="date_picker_options"
+      id={`date_picker_options_${optionsKey}`}
     >
       {pickerType === "relative" ? (
         <>

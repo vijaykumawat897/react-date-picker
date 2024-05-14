@@ -6,6 +6,7 @@ src/
 .git
 .gitignore
 .hg
+*.tgz
 .npmignore
 .npmrc
 .lock-wscript

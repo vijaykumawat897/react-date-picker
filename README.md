@@ -15,6 +15,11 @@ A lightweight plugin to select both **Single Date** and a **Date Range**.
 - Month/Year Selection View
 
 
+## Demo
+
+[See demo here](https://vijaykumawat897.github.io/datepicker-demo/)
+
+
 ## Screenshots
 
 Date Picker
@@ -84,7 +89,7 @@ function handleDateChange (dates) {
 | maxDate   | string/date                    | dark                  | Maximum date                                                                                                                                   |
 | placeholder   | string                    | NULL               | Placeholder                                                                                                                                       |
 | colors   | object                    | {}                 | Theme colors, refer below for supported colors                                                                                                                                  |
-| showCalenderIcon            | boolean | true                  | To show calendar icon on input right                                                                                                                                                       |
+| showCalendarIcon            | boolean | true                  | To show calendar icon on input right                                                                                                                                                       |
 | containerStyle          | style object                  | {}                  | Style of the input container              |
 | inputStyle             | style object                   | {}                | Style of the input                                                                                                                 |
 | containerClass             | string                   | NULL                | Custom class for input container                                                                                                                                 |
@@ -99,7 +104,6 @@ function handleDateChange (dates) {
 ```
 {
     selection: "", // Highlight color for selected dates
-    hover: "", // Background color when dates hoverd
     text: "", // Text color for picker 
     background: "", // Background color for date picker popup
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./datePicker.css";
 import PickerOptions from "./pickerOptions";
 import {
@@ -19,7 +19,7 @@ function DatePicker(props) {
     onChange = () => {},
     placeholder = "",
     colors = {},
-    showCalenderIcon = true,
+    showCalendarIcon = true,
     containerStyle = {},
     inputStyle = {},
     containerClass = "",
@@ -34,6 +34,12 @@ function DatePicker(props) {
     defaultRelativeOptions
   );
   const inputRef = useRef(null);
+  const { optionsKey, inputKey } = useMemo(() => {
+    return {
+      optionsKey: Math.floor(Math.random() * 90000) + 10000,
+      inputKey: Math.floor(Math.random() * 90000) + 10000,
+    };
+  }, []);
 
   useEffect(() => {
     if (defaultSelectedDate) {
@@ -101,14 +107,10 @@ function DatePicker(props) {
 
     if (container) {
       let background = "#ffffff";
-      let hover = "rgb(45 76 130 / 16%)";
       let text = "#7e8190";
       let selection = "#2d4c82";
       if (colors.background) {
         background = colors.background;
-      }
-      if (colors.hover) {
-        hover = colors.hover;
       }
       if (colors.text) {
         text = colors.text;
@@ -116,6 +118,9 @@ function DatePicker(props) {
       if (colors.selection) {
         selection = colors.selection;
       }
+      let hover = `${selection}${Math.floor(0.1 * 255)
+        .toString(16)
+        .padStart(2, 0)}`;
       container.style.setProperty("--text-color", text);
       container.style.setProperty("--selection", selection);
       container.style.setProperty("--hover", hover);
@@ -173,9 +178,9 @@ function DatePicker(props) {
     >
       <input
         ref={inputRef}
-        id="date_picker_input"
+        id={`date_picker_input_${inputKey}`}
         className={`date-input ${inputClass} ${
-          showCalenderIcon ? "has-icon" : ""
+          showCalendarIcon ? "has-icon" : ""
         }`}
         placeholder={placeholder}
         onFocus={() => handleInputFocus()}
@@ -183,13 +188,13 @@ function DatePicker(props) {
         readOnly
         style={inputStyle}
       />
-      {showCalenderIcon ? (
+      {showCalendarIcon ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          id="calendar"
+          id={`calendar_${inputKey}`}
           className="calendar-icon"
         >
           <path
@@ -216,6 +221,8 @@ function DatePicker(props) {
           selectionType={selectionType}
           dateFormat={dateFormat}
           colors={colors}
+          optionsKey={optionsKey}
+          inputKey={inputKey}
         />
       ) : null}
     </div>
