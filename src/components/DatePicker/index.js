@@ -9,11 +9,9 @@ import {
 
 function DatePicker(props) {
   const {
-    // selectionType = "single",
-    // defaultSelectedDate,
     selectionType = "single",
     dateFormat = "DD MMM, YYYY",
-    defaultSelectedDate,
+    selectedDates,
     minDate,
     maxDate,
     onChange = () => {},
@@ -42,23 +40,20 @@ function DatePicker(props) {
   }, []);
 
   useEffect(() => {
-    if (defaultSelectedDate) {
+    if (selectedDates) {
       let dates = [];
 
       if (selectionType === "single") {
         const parsedDate =
-          typeof defaultSelectedDate === "string"
-            ? new Date(defaultSelectedDate)
-            : defaultSelectedDate;
+          typeof selectedDates === "string"
+            ? new Date(selectedDates)
+            : selectedDates;
         if (parsedDate && isValidDate(parsedDate)) {
           dates.push(parsedDate.toISOString().split("T")[0]);
         }
       } else {
-        if (
-          Array.isArray(defaultSelectedDate) &&
-          defaultSelectedDate.length === 2
-        ) {
-          defaultSelectedDate.forEach((date) => {
+        if (Array.isArray(selectedDates) && selectedDates.length === 2) {
+          selectedDates.forEach((date) => {
             const parsedDate = typeof date === "string" ? new Date(date) : date;
             if (parsedDate && isValidDate(parsedDate)) {
               dates.push(parsedDate.toISOString().split("T")[0]);
@@ -67,11 +62,17 @@ function DatePicker(props) {
         }
       }
 
-      setCalendarSelectedDates(dates);
-      setFormattedDateString(dates);
+      if (dates.length > 0) {
+        setCalendarSelectedDates(dates);
+        setFormattedDateString(dates);
+      } else {
+        resetSelections();
+      }
+    } else {
+      resetSelections();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [selectedDates]);
 
   useEffect(() => {
     const relativeOpt = [];
@@ -127,6 +128,12 @@ function DatePicker(props) {
       container.style.setProperty("--bg", background);
     }
   }, [colors]);
+
+  const resetSelections = () => {
+    setCalendarSelectedDates([]);
+    setSelectedDateString("");
+    setSelectedRelativeDate("");
+  };
 
   const setFormattedDateString = (dates) => {
     const formattedDates = dates.map((date) =>

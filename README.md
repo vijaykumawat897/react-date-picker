@@ -84,7 +84,7 @@ function handleDateChange (dates) {
 | ------------------ | ------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | selectionType           | single/range  | single                  | Type of the picker
 | dateFormat           | string | DD MMM, YYYY                 | Format of the date to be shown in the input                                                                                                                                                         |
-| defaultSelectedDate      | string/date                    | NULL                  | Date to be selected by default                
+| selectedDates      | string/date for single and array of 2 string/date for range, in 'YYYY-MM-DD' format                  | NULL                  | Date/Range to be selected                
 | minDate      | string/date                    | NULL                  | Minimun date                                                                                                                                  |
 | maxDate   | string/date                    | dark                  | Maximum date                                                                                                                                   |
 | placeholder   | string                    | NULL               | Placeholder                                                                                                                                       |
