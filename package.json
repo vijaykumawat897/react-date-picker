@@ -1,6 +1,6 @@
 {
   "name": "@vj97/react-date-picker",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Plugin for date selection and date range selection in reactjs",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -52,8 +52,5 @@
     "rollup-plugin-import-css": "^3.5.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2"
-  },
-  "dependencies": {
-    "@vj97/react-date-picker": "file:"
   }
 }
