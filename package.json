@@ -1,6 +1,6 @@
 {
   "name": "@vj97/react-date-picker",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Plugin for date selection and date range selection in reactjs",
   "main": "dist/index.js",
   "module": "dist/index.js",
