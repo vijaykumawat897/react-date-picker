@@ -1,47 +1,52 @@
-export function formatDate(date, format) {
-  const dayIndex = new Date(date).getDay();
-  const day = new Date(date).getDate();
-  const month = new Date(date).getMonth();
-  const year = new Date(date).getFullYear();
-  const dayNames = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const formatTokens = {
-    dddd: dayNames[dayIndex],
-    ddd: dayNames[dayIndex].slice(0, 3),
-    DD: String(day).padStart(2, "0"),
-    D: day,
-    MMMM: monthNames[month],
-    MMM: monthNames[month].slice(0, 3),
-    MM: String(month + 1).padStart(2, "0"),
-    M: month + 1,
-    YYYY: year,
-    YY: String(year).slice(-2),
+export function formatDate(momentObj, formatString) {
+  const tokens = {
+    YYYY: momentObj.getFullYear(), // Full year
+    YY: String(momentObj.getFullYear()).slice(-2), // Last two digits of year
+    M: momentObj.getMonth() + 1, // Month without leading zero
+    MM: String(momentObj.getMonth() + 1).padStart(2, "0"), // Two-digit month (0-based index)
+    MMM: momentObj.toLocaleString("default", { month: "short" }), // Short month name
+    MMMM: momentObj.toLocaleString("default", { month: "long" }), // Full month name
+    D: momentObj.getDate(), // Day without leading zero
+    DD: String(momentObj.getDate()).padStart(2, "0"), // Two-digit day of the month
+    Do: momentObj.getDate() + getOrdinalSuffix(momentObj.getDate()), // Day with ordinal (1st, 2nd, 3rd, etc.)
+    H: momentObj.getHours(), // 24-hour format without leading zero
+    HH: String(momentObj.getHours()).padStart(2, "0"), // Two-digit 24-hour format
+    h: momentObj.getHours() % 12 || 12, // 12-hour format without leading zero
+    hh: String(momentObj.getHours() % 12 || 12).padStart(2, "0"), // Two-digit 12-hour format
+    m: momentObj.getMinutes(), // Minute without leading zero
+    mm: String(momentObj.getMinutes()).padStart(2, "0"), // Two-digit minute
+    s: momentObj.getSeconds(), // Second without leading zero
+    ss: String(momentObj.getSeconds()).padStart(2, "0"), // Two-digit second
+    A: momentObj.getHours() >= 12 ? "PM" : "AM", // Uppercase AM/PM
+    a: momentObj.getHours() >= 12 ? "pm" : "am", // Lowercase am/pm
+    dddd: momentObj.toLocaleString("default", { weekday: "long" }), // Full weekday name
+    ddd: momentObj.toLocaleString("default", { weekday: "short" }), // Short weekday name
+    d: momentObj.getDay(), // Day of the week (0-6)
   };
 
-  const regex = new RegExp(Object.keys(formatTokens).join("|"), "g");
-  return format.replace(regex, (match) => formatTokens[match]);
+  // Helper function to get ordinal suffix for days
+  function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return "th"; // handles 11th to 19th
+    switch (day % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  }
+
+  // Replace format string tokens with actual values
+  return formatString.replace(
+    /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
+    (match) => {
+      // If the match is in the tokens, replace it; otherwise return the match
+      return tokens[match] !== undefined ? tokens[match] : match;
+    }
+  );
 }
 
 export const defaultRelativeOptions = [

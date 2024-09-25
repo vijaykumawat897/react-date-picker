@@ -430,7 +430,11 @@ const Calendar = (props) => {
   return (
     <div className="calendar">
       <div className="header">
-        <button onClick={handlePrevMonth} disabled={checkIfPrevDisbaled()}>
+        <button
+          type="button"
+          onClick={handlePrevMonth}
+          disabled={checkIfPrevDisbaled()}
+        >
           <span>&#8249;</span>
         </button>
         <h3
@@ -449,7 +453,11 @@ const Calendar = (props) => {
             </b>
           ) : null}
         </h3>
-        <button onClick={handleNextMonth} disabled={checkIfNextDisbaled()}>
+        <button
+          type="button"
+          onClick={handleNextMonth}
+          disabled={checkIfNextDisbaled()}
+        >
           <span>&#8250;</span>
         </button>
       </div>

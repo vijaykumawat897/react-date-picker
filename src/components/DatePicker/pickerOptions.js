@@ -35,6 +35,7 @@ const PickerOptions = ({
   minDate,
   maxDate,
   dateFormat,
+  viewFormat,
   inputKey,
   optionsKey,
 }) => {
@@ -65,9 +66,10 @@ const PickerOptions = ({
 
   useEffect(() => {
     if (calendarSelectedDates.length > 0) {
-      const formattedDates = calendarSelectedDates.map((date) =>
-        formatDate(new Date(date), dateFormat)
-      );
+      const formattedDates = calendarSelectedDates.map((date, index) => {
+        const dateObj = `${date} ${index === 0 ? "00:00:00" : "23:59:59"}`;
+        return formatDate(new Date(dateObj), viewFormat);
+      });
       let inputValue = formattedDates.join(" - ");
       setSelectedDateString(inputValue);
     }

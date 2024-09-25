@@ -11,6 +11,7 @@ function DatePicker(props) {
   const {
     selectionType = "single",
     dateFormat = "DD MMM, YYYY",
+    viewFormat = dateFormat,
     selectedDates,
     minDate,
     maxDate,
@@ -32,10 +33,11 @@ function DatePicker(props) {
     defaultRelativeOptions
   );
   const inputRef = useRef(null);
-  const { optionsKey, inputKey } = useMemo(() => {
+  const { optionsKey, inputKey, containerKey } = useMemo(() => {
     return {
       optionsKey: Math.floor(Math.random() * 90000) + 10000,
       inputKey: Math.floor(Math.random() * 90000) + 10000,
+      containerKey: Math.floor(Math.random() * 90000) + 10000,
     };
   }, []);
 
@@ -46,15 +48,18 @@ function DatePicker(props) {
       if (selectionType === "single") {
         const parsedDate =
           typeof selectedDates === "string"
-            ? new Date(selectedDates)
-            : selectedDates;
+            ? new Date(formatDate(new Date(selectedDates), "YYYY-MM-DD"))
+            : new Date(formatDate(selectedDates, "YYYY-MM-DD"));
         if (parsedDate && isValidDate(parsedDate)) {
           dates.push(parsedDate.toISOString().split("T")[0]);
         }
       } else {
         if (Array.isArray(selectedDates) && selectedDates.length === 2) {
           selectedDates.forEach((date) => {
-            const parsedDate = typeof date === "string" ? new Date(date) : date;
+            const parsedDate =
+              typeof date === "string"
+                ? new Date(formatDate(new Date(date), "YYYY-MM-DD"))
+                : new Date(formatDate(date, "YYYY-MM-DD"));
             if (parsedDate && isValidDate(parsedDate)) {
               dates.push(parsedDate.toISOString().split("T")[0]);
             }
@@ -104,7 +109,9 @@ function DatePicker(props) {
   }, [inputHasFocus]);
 
   useEffect(() => {
-    const container = document.getElementById("date_picker_container");
+    const container = document.getElementById(
+      `date_picker_container_${containerKey}`
+    );
 
     if (container) {
       let background = "#ffffff";
@@ -136,8 +143,11 @@ function DatePicker(props) {
   };
 
   const setFormattedDateString = (dates) => {
-    const formattedDates = dates.map((date) =>
-      formatDate(new Date(date), dateFormat)
+    const formattedDates = dates.map((date, index) =>
+      formatDate(
+        new Date(new Date(`${date} ${index === 0 ? "00:00:00" : "23:59:59"}`)),
+        viewFormat
+      )
     );
     let inputValue = formattedDates.join(" - ");
     setSelectedDateString(inputValue);
@@ -153,7 +163,13 @@ function DatePicker(props) {
 
   const handleCalendarDateSelectionChange = (dates) => {
     setCalendarSelectedDates(dates);
-
+    dates = dates.map((date, index) => {
+      const formattedDate = formatDate(
+        new Date(`${date} ${index === 0 ? "00:00:00" : "23:59:59"}`),
+        dateFormat
+      );
+      return formattedDate;
+    });
     if (selectionType === "range" && dates.length === 2) {
       onChange({ startDate: dates[0], endDate: dates[1] });
     } else if (selectionType === "single" && dates.length === 1) {
@@ -181,7 +197,7 @@ function DatePicker(props) {
     <div
       className={`date-picker ${containerClass}`}
       style={containerStyle}
-      id="date_picker_container"
+      id={`date_picker_container_${containerKey}`}
     >
       <input
         ref={inputRef}
@@ -227,6 +243,7 @@ function DatePicker(props) {
           }
           selectionType={selectionType}
           dateFormat={dateFormat}
+          viewFormat={viewFormat}
           colors={colors}
           optionsKey={optionsKey}
           inputKey={inputKey}
