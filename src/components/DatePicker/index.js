@@ -23,6 +23,7 @@ function DatePicker(props) {
     inputStyle = {},
     containerClass = "",
     inputClass = "",
+    disabled = false,
   } = props;
   const [popupPosition, setPopupPosition] = useState("bottom");
   const [inputHasFocus, setInputHasFocus] = useState(false);
@@ -182,11 +183,11 @@ function DatePicker(props) {
     const spaceBelow = window.innerHeight - inputRect.bottom;
     const spaceRight = window.innerWidth - inputRect.left;
     let positionX = "bottom";
-    if (spaceBelow < 360) {
+    if (spaceBelow < 257) {
       positionX = "top";
     }
     let positionY = "right";
-    if (spaceRight < 332) {
+    if (spaceRight < 250) {
       positionY = "left";
     }
     setPopupPosition(`${positionX} ${positionY}`);
@@ -210,6 +211,7 @@ function DatePicker(props) {
         value={selectedRelativeDate || selectedDateString || ""}
         readOnly
         style={inputStyle}
+        disabled={disabled}
       />
       {showCalendarIcon ? (
         <svg
