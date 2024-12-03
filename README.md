@@ -95,7 +95,8 @@ function handleDateChange (dates) {
 | inputStyle             | style object                   | {}                | Style of the input                                                                                                                 |
 | containerClass             | string                   | NULL                | Custom class for input container                                                                                                                                 |
 | inputClass               | string                   | NULL                | Custom class for input 
-| disabled               | boolean                   | false                | disable datepicker input                                                                                                                                            |
+| disabled               | boolean                   | false                | disable datepicker input   
+| required               | boolean                   | false                | required datepicker input                                                                                                                                          |
 | defaultPickerType        | relative/absolute                   | absolute                 | Picker type to be opened be default                                                                                                                                      |
 | onChange              | function                   | n/a                 |                                                        Callback called when date is selected                                                                               |
 

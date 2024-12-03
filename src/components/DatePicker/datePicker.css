@@ -13,6 +13,7 @@
   border-radius: 8px;
   box-shadow: 0 0 7px -4px gray;
   box-sizing: border-box;
+  caret-color: transparent;
   color: var(--text-color);
   height: 40px;
   padding: 8px;

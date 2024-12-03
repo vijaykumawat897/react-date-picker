@@ -24,6 +24,7 @@ function DatePicker(props) {
     containerClass = "",
     inputClass = "",
     disabled = false,
+    required = false,
   } = props;
   const [popupPosition, setPopupPosition] = useState("bottom");
   const [inputHasFocus, setInputHasFocus] = useState(false);
@@ -209,9 +210,10 @@ function DatePicker(props) {
         placeholder={placeholder}
         onFocus={() => handleInputFocus()}
         value={selectedRelativeDate || selectedDateString || ""}
-        readOnly
+        // readOnly
         style={inputStyle}
         disabled={disabled}
+        required={required}
       />
       {showCalendarIcon ? (
         <svg
