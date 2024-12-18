@@ -16,7 +16,17 @@ const Calendar = (props) => {
   } = props;
   // const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(
-    highlightedDates.length > 0 ? new Date(highlightedDates[0]) : new Date()
+    highlightedDates.length > 0
+      ? new Date(highlightedDates[0])
+      : maxDate &&
+        new Date(new Date(maxDate).setHours(23, 59, 59, 999)).getTime() <=
+          new Date().getTime()
+      ? new Date(maxDate)
+      : minDate &&
+        new Date(new Date(minDate).setHours(0, 0, 0, 0)).getTime() >=
+          new Date().getTime()
+      ? new Date(minDate)
+      : new Date()
   );
   const [view, setView] = useState("days");
   const [years, setYears] = useState({});
